@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"  
+xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://www.springframework.org/schema/beans    
+					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+					http://www.springframework.org/schema/context    
+					http://www.springframework.org/schema/context/spring-context.xsd    
+					http://www.springframework.org/schema/mvc    
+					http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+		<mvc:annotation-driven />
+		<!-- 扫描注解的包 -->
+		<context:component-scan base-package="com.liy.web" />
+		<context:component-scan base-package="com.liy.service.impl" />
+		<context:component-scan base-package="com.liy.dao.impl" />
+		<mvc:view-controller path="/" view-name="home" />
+		<!-- 资源映射 -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+    <mvc:default-servlet-handler />
+	
+	<!-- view映射 -->
+    <!--<bean id="viewResolver"
+        class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
+    <bean id="viewResolver"
+        	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+         <property name="prefix" value="/views/"></property>  
+	        <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->  
+	     <property name="suffix" value=".jsp"></property>  
+    </bean>
+	  <!-- 上传文件bean -->  
+	    <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
+	        <property name="defaultEncoding" value="utf-8" /> <property name="maxUploadSize"   
+	        value="10485760000" /> <property name="maxInMemorySize" value="40960" />   
+	  </bean> -->  
+	
+	<!-- 未知项 -->
+    <!--  <bean id="tilesConfigurer"
+        class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <value>
+                /WEB-INF/**/tiles.xml
+			</value>
+        </property>
+    </bean>-->
+    <!-- 这里拦截器还有一种配置方法【针对路径进行配置】 推荐使用这个，方便直观-->
+    <!--  
+    <mvc:interceptors>
+     <mvc:interceptor>
+      <mvc:mapping path="/user/MyHome"/>
+      <mvc:mapping path="/usermanager/*"/>
+   <bean  class="com.springTest.web.interceptor.MyInterceptor"></bean>
+     </mvc:interceptor>
+    </mvc:interceptors>-->
+</beans>
